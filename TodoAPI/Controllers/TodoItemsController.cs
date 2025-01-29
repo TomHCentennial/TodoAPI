@@ -21,8 +21,8 @@ namespace TodoAPI.Controllers
 
             if (_context.TodoItems.Count() == 0)
             {
-                _context.TodoItems.Add(new TodoItem { Name="Lab1", IsComplete =true});
-                _context.TodoItems.Add(new TodoItem { Name = "Lab2", IsComplete = false })
+                _context.TodoItems.Add(new TodoItem { Name = "Lab1", IsComplete = true });
+                _context.TodoItems.Add(new TodoItem { Name = "Lab2", IsComplete = false });
             }
         }
 
@@ -108,6 +108,20 @@ namespace TodoAPI.Controllers
         private bool TodoItemExists(long id)
         {
             return _context.TodoItems.Any(e => e.Id == id);
+        }
+
+        // Method to populate initial data, including quiz#2
+        private void InitializeTodoItems()
+        {
+            var initialItems = new List<TodoItem>
+            {
+                new TodoItem { Name = "Lab1", IsComplete = true },
+                new TodoItem { Name = "Lab2", IsComplete = false },
+                new TodoItem { Name = "quiz#2", IsComplete = false }
+            };
+
+            _context.TodoItems.AddRange(initialItems);
+            _context.SaveChanges();
         }
     }
 }
